@@ -1103,20 +1103,19 @@ export default {
       if (!this.isEditable(rowIndex, columnIndex)) return
 
       let cellEle = document.querySelector(`#${tableCell.key}`)
-      let newVal = trim(cellEle.innerHTML)
-
+      let newVal = trim(cellEle.innerText)
       if (cellEle && (tableCell.data !== newVal)) {
         if (typeof tableCell.data === 'number') {
           newVal = Number(newVal)
           if (tableCell.data === newVal) return
           if (isNaN(newVal)) {
-            return (cellEle.innerHTML = `${tableCell.data}`)
+            return (cellEle.innerText = `${tableCell.data}`)
           }
           
           tableCell.data = newVal
           this.$emit('cell-change', rowIndex, columnIndex, tableCell.data)
         } else {
-          tableCell.data = trim(cellEle.innerHTML)
+          tableCell.data = trim(cellEle.innerText)
           this.$emit('cell-change', rowIndex, columnIndex, tableCell.data)
         }
       }
